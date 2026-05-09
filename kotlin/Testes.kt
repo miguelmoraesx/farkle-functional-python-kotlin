@@ -34,8 +34,18 @@ fun main() {
         Triple(caso, obtido, obtido == caso.esperado)
     }
 
+    println("%-24s | %-12s | %-12s | Status".format("Entrada", "Esperado", "Obtido"))
+    println("-".repeat(62))
+
     resultados.forEach { (caso, obtido, passou) ->
-        println("Entrada: ${caso.dados} | Esperado: ${caso.esperado} | Obtido: $obtido | ${if (passou) "OK" else "FALHOU"}")
+        println(
+            "%-24s | %-12s | %-12s | %s".format(
+                caso.dados.toString(),
+                caso.esperado.toString(),
+                obtido.toString(),
+                if (passou) "OK" else "FALHOU"
+            )
+        )
         if (!passou) {
             println("Razao provavel: ${explicarFalha(obtido, caso.esperado)}")
             println("Correcao: ajustar pontuacaoJogada/pontosPorNumero para refletir exatamente a tabela de pontuacao.")

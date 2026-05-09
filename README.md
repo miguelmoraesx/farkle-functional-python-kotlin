@@ -67,7 +67,22 @@ Esse comando executa os testes de pontuação e uma simulação de 1000 partidas
 
 ### Kotlin
 
-Se o compilador Kotlin estiver instalado:
+Carregue o SDKMAN na sessão do terminal:
+
+```bash
+source "$HOME/.sdkman/bin/sdkman-init.sh"
+```
+
+Confira se a versão nova está sendo usada:
+
+```bash
+which kotlinc
+kotlinc -version
+```
+
+O caminho deve apontar para algo como `.sdkman/candidates/kotlin/current/bin/kotlinc`.
+
+Depois compile e execute:
 
 ```bash
 kotlinc kotlin/Farkle.kt kotlin/Testes.kt -include-runtime -d farkle-testes.jar
