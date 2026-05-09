@@ -53,3 +53,35 @@ farkle-functional-python-kotlin/
 │   └── Testes.kt
 └── notebook/
     └── miguel_pedrobelota_adrian.ipynb
+```
+
+## ▶️ Como executar
+
+### Python
+
+```bash
+python3 src/farkle.py
+```
+
+Esse comando executa os testes de pontuação e uma simulação de 1000 partidas.
+
+### Kotlin
+
+Se o compilador Kotlin estiver instalado:
+
+```bash
+kotlinc kotlin/Farkle.kt kotlin/Testes.kt -include-runtime -d farkle-testes.jar
+java -jar farkle-testes.jar
+```
+
+O arquivo `kotlin/Testes.kt` valida a função `pontuacaoJogada` com mais de 10 casos.
+
+### Notebook
+
+A entrega principal está em:
+
+```txt
+notebook/miguel_pedrobelota_adrian.ipynb
+```
+
+O notebook reúne a Parte I, a implementação Python, a tradução Kotlin, os testes e a comparação entre Python e Kotlin.

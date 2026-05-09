@@ -39,6 +39,11 @@ def valores_unicos(lst):
     return [primeiro] + resto
 
 
+def valores_unicos_(lst):
+    """Alias com o nome usado no enunciado."""
+    return valores_unicos(lst)
+
+
 def eh_sequencia(dados):
     """
     Verifica se os dados formam a sequência 1, 2, 3, 4, 5, 6.
@@ -83,6 +88,11 @@ def pontos_por_numero(dados, num):
     return (pontos, dados_usados)
 
 
+def pontos_por_numero_(dados, num):
+    """Alias com o nome usado no enunciado."""
+    return pontos_por_numero(dados, num)
+
+
 def pontuacao_jogada(dados):
     """
     Calcula a pontuação total de uma jogada.
@@ -103,6 +113,11 @@ def pontuacao_jogada(dados):
         resultados,
         (0, 0)
     )
+
+
+def pontuacao_jogada_(dados):
+    """Alias com o nome usado no enunciado."""
+    return pontuacao_jogada(dados)
 
 
 def escolha_aleatoria(n_restante, pontos):
@@ -272,11 +287,14 @@ def testar_pontuacao():
         casos
     )
 
+    print(f"{'Entrada':<24} | {'Esperado':<12} | {'Obtido':<12} | Status")
+    print("-" * 62)
+
     list(map(
         lambda r: print(
-            f"Entrada: {r[0]} | "
-            f"Esperado: {r[1]} | "
-            f"Obtido: {r[2]} | "
+            f"{str(r[0]):<24} | "
+            f"{str(r[1]):<12} | "
+            f"{str(r[2]):<12} | "
             f"{'OK' if r[1] == r[2] else 'FALHOU'}"
         ),
         resultados
