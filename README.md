@@ -6,8 +6,8 @@ Projeto desenvolvido para a disciplina **Linguagens de Programação (2026-1)** 
 
 ## 👨‍💻 Integrantes
 
-- Miguel Oliveira Moraes de Souza  
 - Adrian Batista Pereira  
+- Miguel Oliveira Moraes de Souza  
 - Pedro Henrique Belota Gadelha  
 
 ---
@@ -52,7 +52,7 @@ farkle-functional-python-kotlin/
 │   ├── Farkle.kt
 │   └── Testes.kt
 └── notebook/
-    └── miguel_pedrobelota_adrian.ipynb
+    └── AdrianBatistaPereira_MiguelOliveiraMoraesDeSouza_PedroHenriqueBelotaGadelha.ipynb
 ```
 
 ## ▶️ Como executar
@@ -96,7 +96,7 @@ O arquivo `kotlin/Testes.kt` valida a função `pontuacaoJogada` com mais de 10 
 A entrega principal está em:
 
 ```txt
-notebook/miguel_pedrobelota_adrian.ipynb
+notebook/AdrianBatistaPereira_MiguelOliveiraMoraesDeSouza_PedroHenriqueBelotaGadelha.ipynb
 ```
 
 O notebook reúne a Parte I, a implementação Python, a tradução Kotlin, os testes e a comparação entre Python e Kotlin.

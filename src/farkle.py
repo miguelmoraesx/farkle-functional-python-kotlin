@@ -3,18 +3,12 @@ from functools import reduce
 
 
 def rolar_dados(n):
-    """
-    Rola n dados e retorna uma lista com valores de 1 a 6.
-    Aqui usamos list comprehension, como pedido no trabalho.
-    """
+    """Sorteia n dados."""
     return [random.randint(1, 6) for _ in range(n)]
 
 
 def contar(lst, alvo):
-    """
-    Conta quantas vezes um valor aparece na lista.
-    A função foi feita com recursão, sem usar for ou while.
-    """
+    """Conta ocorrências de alvo."""
     if not lst:
         return 0
 
@@ -23,45 +17,32 @@ def contar(lst, alvo):
 
 
 def valores_unicos(lst):
-    """
-    Retorna os valores únicos da lista.
-    A ordem considerada é a ordem em que os elementos aparecem.
-    """
-    if not lst:
-        return []
+    """Mantém só a primeira ocorrência de cada valor."""
+    def aux(resto, vistos):
+        if not resto:
+            return []
 
-    primeiro = lst[0]
-    resto = valores_unicos(lst[1:])
+        primeiro = resto[0]
+        if primeiro in vistos:
+            return aux(resto[1:], vistos)
 
-    if primeiro in resto:
-        return resto
+        return [primeiro] + aux(resto[1:], vistos + [primeiro])
 
-    return [primeiro] + resto
+    return aux(lst, [])
 
 
 def valores_unicos_(lst):
-    """Alias com o nome usado no enunciado."""
+    """Nome pedido no enunciado."""
     return valores_unicos(lst)
 
 
 def eh_sequencia(dados):
-    """
-    Verifica se os dados formam a sequência 1, 2, 3, 4, 5, 6.
-    Essa jogada vale 1500 pontos.
-    """
+    """Confere a sequência 1, 2, 3, 4, 5, 6."""
     return sorted(dados) == [1, 2, 3, 4, 5, 6]
 
 
 def pontos_por_numero(dados, num):
-    """
-    Calcula a pontuação referente a um número específico.
-
-    Exemplo:
-    - três dados com valor 2 valem 200 pontos;
-    - três dados com valor 1 valem 1000 pontos;
-    - cada 1 sozinho vale 100;
-    - cada 5 sozinho vale 50.
-    """
+    """Pontua as ocorrências de um número."""
     qtd = contar(dados, num)
 
     if qtd < 3:
@@ -89,17 +70,12 @@ def pontos_por_numero(dados, num):
 
 
 def pontos_por_numero_(dados, num):
-    """Alias com o nome usado no enunciado."""
+    """Nome pedido no enunciado."""
     return pontos_por_numero(dados, num)
 
 
 def pontuacao_jogada(dados):
-    """
-    Calcula a pontuação total de uma jogada.
-
-    Primeiro verifica se é sequência.
-    Se não for, soma a pontuação de cada número de 1 a 6.
-    """
+    """Calcula pontos e quantos dados entraram na pontuação."""
     if eh_sequencia(dados):
         return (1500, 6)
 
@@ -116,26 +92,17 @@ def pontuacao_jogada(dados):
 
 
 def pontuacao_jogada_(dados):
-    """Alias com o nome usado no enunciado."""
+    """Nome pedido no enunciado."""
     return pontuacao_jogada(dados)
 
 
 def escolha_aleatoria(n_restante, pontos):
-    """
-    Estratégia simples: escolhe aleatoriamente se continua ou para.
-    """
+    """Decide no sorteio se continua."""
     return random.choice([True, False])
 
 
 def escolha_heuristica(n_restante, pontos):
-    """
-    Estratégia criada para tentar ser melhor que a aleatória.
-
-    Ideia:
-    - se já fez pelo menos 300 pontos na rodada, para;
-    - se restam poucos dados, também para;
-    - caso contrário, continua.
-    """
+    """Para com 300+ pontos ou quando restam poucos dados."""
     if pontos >= 300:
         return False
 
@@ -146,12 +113,7 @@ def escolha_heuristica(n_restante, pontos):
 
 
 def turno(pontos_rodada, n_dados, escolha, verbose=True):
-    """
-    Executa o turno de um jogador.
-
-    O jogador rola os dados, ganha pontos se possível,
-    e decide se continua ou para.
-    """
+    """Roda um turno até o jogador parar ou sair Farkle."""
     dados = rolar_dados(n_dados)
     pontos, dados_pontuadores = pontuacao_jogada(dados)
 
@@ -194,12 +156,7 @@ def partida(
     pontuacao_max=10000,
     verbose=False
 ):
-    """
-    Simula uma partida entre dois jogadores.
-
-    Jogador 0 usa estrategia0.
-    Jogador 1 usa estrategia1.
-    """
+    """Alterna os jogadores até alguém bater a meta."""
     if pontos is None:
         pontos = [0, 0]
 
@@ -241,13 +198,7 @@ def partida(
 
 
 def simular(n=1000):
-    """
-    Simula várias partidas e calcula o percentual de vitórias
-    da estratégia heurística contra a estratégia aleatória.
-
-    Aqui usamos reduce para evitar for/while e também evitar
-    estourar o limite de recursão do Python.
-    """
+    """Compara a heurística com a escolha aleatória."""
     vitorias = reduce(
         lambda total, _: total + (
             1 if partida(escolha_heuristica, escolha_aleatoria) == 0 else 0
@@ -261,10 +212,7 @@ def simular(n=1000):
 
 
 def testar_pontuacao():
-    """
-    Testes simples para verificar se a pontuação está correta.
-    Esses casos também ajudam depois na tradução para Kotlin.
-    """
+    """Casos básicos da tabela de pontuação."""
     casos = [
         ([1, 5, 2, 3, 4, 6], (1500, 6)),
         ([2, 2, 3, 4, 4, 6], (0, 0)),

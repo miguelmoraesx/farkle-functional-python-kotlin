@@ -10,15 +10,16 @@ tailrec fun contar(lst: List<Int>, alvo: Int, acumulado: Int = 0): Int =
         else -> contar(lst.drop(1), alvo, acumulado)
     }
 
-fun valoresUnicos(lst: List<Int>): List<Int> =
-    when {
-        lst.isEmpty() -> emptyList()
-        else -> {
-            val primeiro = lst.first()
-            val resto = valoresUnicos(lst.drop(1))
-            if (primeiro in resto) resto else listOf(primeiro) + resto
+fun valoresUnicos(lst: List<Int>): List<Int> {
+    fun aux(resto: List<Int>, vistos: List<Int>): List<Int> =
+        when {
+            resto.isEmpty() -> emptyList()
+            resto.first() in vistos -> aux(resto.drop(1), vistos)
+            else -> listOf(resto.first()) + aux(resto.drop(1), vistos + resto.first())
         }
-    }
+
+    return aux(lst, emptyList())
+}
 
 fun ehSequencia(dados: List<Int>): Boolean =
     dados.sorted() == listOf(1, 2, 3, 4, 5, 6)
@@ -138,9 +139,9 @@ tailrec fun partida(
 fun passwordClassification(password: String): Pair<String, List<String>> {
     val criterios = listOf(
         Pair("tamanho", password.length >= 8),
-        Pair("maiuscula", password.any { it in 'A'..'Z' }),
-        Pair("minuscula", password.any { it in 'a'..'z' }),
-        Pair("digito", password.any { it in '0'..'9' }),
+        Pair("maiúscula", password.any { it in 'A'..'Z' }),
+        Pair("minúscula", password.any { it in 'a'..'z' }),
+        Pair("dígito", password.any { it in '0'..'9' }),
         Pair("caractere especial", password.any { it in "!@#$%^&*()-+" })
     )
 
@@ -165,7 +166,7 @@ fun simular(n: Int = 1000): String {
         .count { it == 0 }
     val percentual = vitorias.toDouble() / n * 100.0
 
-    return "Heuristica venceu %.2f%% das partidas contra aleatorio.".format(percentual)
+    return "Heurística venceu %.2f%% das partidas contra aleatório.".format(percentual)
 }
 
 fun demoFarkle() {

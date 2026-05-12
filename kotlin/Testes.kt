@@ -47,8 +47,8 @@ fun main() {
             )
         )
         if (!passou) {
-            println("Razao provavel: ${explicarFalha(obtido, caso.esperado)}")
-            println("Correcao: ajustar pontuacaoJogada/pontosPorNumero para refletir exatamente a tabela de pontuacao.")
+            println("Razão provável: ${explicarFalha(obtido, caso.esperado)}")
+            println("Correção: ajustar pontuacaoJogada/pontosPorNumero para seguir a tabela de pontuação.")
         }
     }
 
